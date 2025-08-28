@@ -28,13 +28,18 @@ pipeline {
                 }
             }
             steps {
-                echo 'Testing the app '
+                echo 'Test stage'
                 sh '''
                         test -f build/index.html
                         npm --version
                         npm test -a
                    '''
             }
+        }
+    }
+    post {
+        always {
+            junit 'test-results/junit.xml'
         }
     }
 }
